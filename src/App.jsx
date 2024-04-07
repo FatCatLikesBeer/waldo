@@ -1,6 +1,6 @@
-import Top from '../components/Header';
+import Top from './components/Header';
+import Puzzle from './components/Puzzle';
 import './App.css';
-import Puzzle from '../components/Puzzle';
 
 function App() {
   return(

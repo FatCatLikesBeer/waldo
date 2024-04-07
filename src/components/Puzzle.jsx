@@ -1,4 +1,4 @@
-import pic from '../src/assets/pic1.jpg';
+import pic from '../assets/pic1.jpg';
 import { useState, useEffect, useRef } from 'react';
 
 const CharacterSelectionModal = (props) => {
