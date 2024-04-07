@@ -12,6 +12,12 @@
 }
 
 .puzzle {
-  height: 50%;
-  width: 50%;
+  max-width: 900px;
+}
+
+.character-selection-modal {
+  width: 220px;
+  background-color: gainsboro;
+  color: #282828;
+  border-radius: 5px;
 }
