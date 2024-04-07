@@ -20,4 +20,12 @@
   background-color: gainsboro;
   color: #282828;
   border-radius: 5px;
+  position: absolute;
+}
+
+.modal-x-button {
+  position: absolute;
+  left: 8px;
+  top: 0px;
+  cursor: pointer;
 }
