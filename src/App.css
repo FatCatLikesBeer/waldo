@@ -33,3 +33,39 @@
   top: 0px;
   cursor: pointer;
 }
+
+#navbar {
+  position: relative;
+  width: 800px;
+  height: 90px;
+  max-width: 800px;
+  max-height: 90px;
+  margin: 0 auto 40px;
+  align-items: center;
+}
+
+#navtitle {
+  position: absolute;
+  left: 0;
+}
+
+#navlinksdiv {
+  margin: 48px 0 0;
+  position: absolute;
+  right: 0;
+}
+
+#navlinks {
+  padding: auto 0 auto;
+  list-style-type: none;
+}
+
+#navlinks > li {
+  display: inline;
+  padding-left: 40px;
+}
+
+#navbar * a{
+  color: gainsboro !important;
+}
+

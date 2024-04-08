@@ -1,4 +1,5 @@
-import Top from './components/Header';
+import Top from './components/Top';
+import Bottom from './components/Bottom';
 import Puzzle from './components/Puzzle';
 import './App.css';
 
@@ -7,6 +8,7 @@ function App() {
     <>
       <Top />
       <Puzzle />
+      <Bottom />
     </>
   )
 }
