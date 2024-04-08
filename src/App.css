@@ -49,6 +49,13 @@
   left: 0;
 }
 
+#subtitle {
+  position: absolute;
+  left: 0;
+  top: 68px;
+  font-weight: 300;
+}
+
 #navlinksdiv {
   margin: 48px 0 0;
   position: absolute;

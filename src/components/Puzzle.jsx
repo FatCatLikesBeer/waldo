@@ -17,15 +17,15 @@ const CharacterSelectionModal = (props) => {
   // Used to get the height of Modal
   const elementRef = useRef(null);
   // Used to switch modal up or down
-  const [modalUp, setModalUp] = useState(0);
+  const [modalUp, setModalUp] = useState(20);
 
   // Modal open upwards if close to bottom of window
   useEffect(() => {
     const modalUpCondition = window.innerHeight - elementRef.current.clientHeight;
     if (windY > modalUpCondition) {
-      setModalUp(elementRef.current.clientHeight);
+      setModalUp(elementRef.current.clientHeight - 20);
     } else {
-      setModalUp(0);
+      setModalUp(20);
     }
   }, [hide]);
 
