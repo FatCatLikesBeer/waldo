@@ -1,4 +1,17 @@
-export default function Top() {
+import { useState } from 'react';
+
+export default function Top(props) {
+
+  const links = ["Text", "Waldo", "Coins"];
+  const gameNames = props.game_names;
+  const setGame = props.game_picker;
+  const gameData = []
+  gameNames.forEach( elem => {
+    gameData.push({
+      gameName: elem,
+      setGame: function(){setGame(elem)},
+    });
+  })
 
   return(
     <div id="navbar">
@@ -6,15 +19,9 @@ export default function Top() {
       <h3 id="subtitle">A Where's Waldo Type Game</h3>
       <div id="navlinksdiv">
         <ul id="navlinks">
-          <li>
-            <a href="#">Text</a>
-          </li>
-          <li>
-            <a href="#">Waldo</a>
-          </li>
-          <li>
-            <a href="#">Coins</a>
-          </li>
+          {gameData.map( (elem, index)=> {
+            return (<li key={index}><span onClick={elem.setGame}>{String(elem.gameName[0].toUpperCase() + elem.gameName.slice(1))}</span></li>)
+          })}
         </ul>
       </div>
     </div>

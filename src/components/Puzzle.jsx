@@ -1,4 +1,3 @@
-import pic from '../assets/pic1.jpg';
 import { useState, useEffect, useRef } from 'react';
 
 const CharacterSelectionModal = (props) => {
@@ -37,18 +36,27 @@ const CharacterSelectionModal = (props) => {
     document.addEventListener("keydown", handleKeydown);
   });
 
+  const goalNames = {...props.goal_names};
+
+  const sendMe = {
+    nameOne: goalNames.goalOne,
+    nameTwo: goalNames.goalTwo,
+    nameThree: goalNames.goalThree,
+    sendOne: function() { console.log(JSON.stringify({ name: sendMe.nameOne, loc: [imageX, imageY]})) },
+    sendTwo: function() { console.log(JSON.stringify({ name: sendMe.nameTwo, loc: [imageX, imageY]})) },
+    sendThree: function() { console.log(JSON.stringify({ name: sendMe.nameThree, loc: [imageX, imageY]})) },
+  }
+
+
   return (
     <div>
       <div className="character-selection-radius" style={{display: hide, top: pageY - 17, left: pageX - 17}}>
       </div>
       <div className="character-selection-modal" id="imageModal" style={{display: hide, top: pageY - modalUp, left: pageX + 20}} ref={elementRef}>
         <span className="modal-x-button" onClick={closeModal}>&times;</span>
-        <p>Image X: {imageX}</p>
-        <p>Image Y: {imageY}</p>
-        <p>Page X: {pageX}</p>
-        <p>Page Y: {pageY}</p>
-        <p>Wind X: {windX}</p>
-        <p>Wind Y: {windY}</p>
+        <div><p><span onClick={sendMe.sendOne}>Image 1</span></p></div>
+        <div><p><span onClick={sendMe.sendTwo}>Image 2</span></p></div>
+        <div><p><span onClick={sendMe.sendThree}>Image 3</span></p></div>
       </div>
     </div>
   )
@@ -56,7 +64,7 @@ const CharacterSelectionModal = (props) => {
 
 // Thanks to PaunescuDragos-99 / waldo-game-frontend
 // I didnt' have to knowledge to gather coordinates
-const Puzzle = () => {
+const Puzzle = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const [imageLoc, setImageLoc] = useState([0, 0]);
@@ -87,8 +95,15 @@ const Puzzle = () => {
 
   return(
     <>
-      <CharacterSelectionModal show_modal={showModal} page_loc={pageLoc} image_loc={imageLoc} window_loc={windowLoc} closeModal={modalOff}/>
-      <img className="puzzle" onClick={handleClick} src={pic} />
+      <CharacterSelectionModal
+        show_modal={showModal}
+        page_loc={pageLoc}
+        image_loc={imageLoc}
+        window_loc={windowLoc}
+        closeModal={modalOff}
+        goal_names={props.goalNames}
+      />
+      <img className="puzzle" onClick={handleClick} src={props.pic} />
     </>
   )
 }

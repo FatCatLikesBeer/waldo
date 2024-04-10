@@ -72,7 +72,8 @@
   padding-left: 40px;
 }
 
-#navbar * a{
+#navbar * span, #navbar * a {
   color: gainsboro !important;
+  cursor: pointer;
 }
 
