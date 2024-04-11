@@ -41,27 +41,19 @@ const CharacterSelectionModal = (props) => {
     }
   };
 
-  /*
-  This entire object isn't that necessary but I needed a
-  place to contain the onClick functions for the dropdown modal
-  */
-  // !!! Replace this manualized bullshit with a mapped array !!!
-  const sendMe = {
-    nameOne: goalNames.goalOne.name,
-    nameTwo: goalNames.goalTwo.name,
-    nameThree: goalNames.goalThree.name,
-    sendOne: function() {
-      console.log(JSON.stringify(new DataFormatter(props.game_name, sendMe.nameOne)));
+  // An array for the goal's display names
+  const displayNames = [];
+  for (const key in goalNames) {
+    displayNames.push(goalNames[key].display);
+  };
+
+  // An array for the goal's functions
+  const goalFunctions = [];
+  for (const key in goalNames) {
+    goalFunctions.push(function(){
+      console.log(JSON.stringify(new DataFormatter(props.game_name, goalNames[key].name)));
       closeModal();
-    },
-    sendTwo: function() {
-      console.log(JSON.stringify(new DataFormatter(props.game_name, sendMe.nameTwo)));
-      closeModal();
-    },
-    sendThree: function() {
-      console.log(JSON.stringify(new DataFormatter(props.game_name, sendMe.nameThree)));
-      closeModal();
-    },
+    });
   }
 
   return (
@@ -70,10 +62,9 @@ const CharacterSelectionModal = (props) => {
       </div>
       <div className="character-selection-modal" id="imageModal" style={{display: hide, top: pageY - modalUp, left: pageX + 20}} ref={elementRef}>
         <span className="modal-x-button" onClick={closeModal}>&times;</span>
-        {/* !!! Replace the following manualized bullshit with a mapped array !!! */}
-        <div><p><span onClick={sendMe.sendOne}>{goalNames.goalOne.display}</span></p></div>
-        <div><p><span onClick={sendMe.sendTwo}>{goalNames.goalTwo.display}</span></p></div>
-        <div><p><span onClick={sendMe.sendThree}>{goalNames.goalThree.display}</span></p></div>
+        {displayNames.map( (key, index) => {
+          return( <div key={index}><p><span onClick={goalFunctions[index]}>{key}</span></p></div> )
+        })}
       </div>
     </div>
   )
