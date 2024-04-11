@@ -9,9 +9,9 @@ import testPuzzle from './assets/react.svg';
 import Game from './gameConstructor';
 
 const gameData = [
-  new Game("woman", puzzle1, "eyes", "elbows", "hair"),
-  new Game("text", puzzle2, "tildea", "uppercaseT", "sharpS"),
-  new Game("testicle", testPuzzle, "testicle", "boobies", "ass"),
+  new Game("nicola", puzzle1, "eyes", "eyes", "elbows", "elbows", "hair", "hair"),
+  new Game("text", puzzle2, "tildea", "ã", "uppercaseT", "T", "sharpS", "ß"),
+  new Game("testicle", testPuzzle, "testicle", "testicle", "boobies", "boobies", "ass", "ass"),
 ];
 
 const listOfLinks = gameData.map( elem => {
@@ -19,16 +19,14 @@ const listOfLinks = gameData.map( elem => {
 })
 
 function App() {
-  const [game, setGame] = useState('default');
+  const [game, setGame] = useState('default'); // It might be better if I used useContext here.
 
   return(
     <>
       <Top game_names={listOfLinks} game_picker={setGame} />
       {gameData.map( (elem, index)=> {
         if (game === elem.gameName) {
-          return(
-            <Puzzle pic={elem.image} goalNames={elem.goalNames} key={index} />
-          );
+          return( <Puzzle pic={elem.image} goalNames={elem.goalNames} key={index} /> );
         }
       })}
       <Bottom />
@@ -36,4 +34,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

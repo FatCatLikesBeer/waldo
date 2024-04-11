@@ -39,12 +39,21 @@ const CharacterSelectionModal = (props) => {
   const goalNames = {...props.goal_names};
 
   const sendMe = {
-    nameOne: goalNames.goalOne,
-    nameTwo: goalNames.goalTwo,
-    nameThree: goalNames.goalThree,
-    sendOne: function() { console.log(JSON.stringify({ name: sendMe.nameOne, loc: [imageX, imageY]})) },
-    sendTwo: function() { console.log(JSON.stringify({ name: sendMe.nameTwo, loc: [imageX, imageY]})) },
-    sendThree: function() { console.log(JSON.stringify({ name: sendMe.nameThree, loc: [imageX, imageY]})) },
+    nameOne: goalNames.goalOne.name,
+    nameTwo: goalNames.goalTwo.name,
+    nameThree: goalNames.goalThree.name,
+    sendOne: function() {
+      console.log(JSON.stringify({ name: sendMe.nameOne, loc: [imageX, imageY]}));
+      closeModal();
+    },
+    sendTwo: function() {
+      console.log(JSON.stringify({ name: sendMe.nameTwo, loc: [imageX, imageY]}));
+      closeModal();
+    },
+    sendThree: function() {
+      console.log(JSON.stringify({ name: sendMe.nameThree, loc: [imageX, imageY]}));
+      closeModal();
+    },
   }
 
 
@@ -54,9 +63,9 @@ const CharacterSelectionModal = (props) => {
       </div>
       <div className="character-selection-modal" id="imageModal" style={{display: hide, top: pageY - modalUp, left: pageX + 20}} ref={elementRef}>
         <span className="modal-x-button" onClick={closeModal}>&times;</span>
-        <div><p><span onClick={sendMe.sendOne}>Image 1</span></p></div>
-        <div><p><span onClick={sendMe.sendTwo}>Image 2</span></p></div>
-        <div><p><span onClick={sendMe.sendThree}>Image 3</span></p></div>
+        <div><p><span onClick={sendMe.sendOne}>{goalNames.goalOne.display}</span></p></div>
+        <div><p><span onClick={sendMe.sendTwo}>{goalNames.goalTwo.display}</span></p></div>
+        <div><p><span onClick={sendMe.sendThree}>{goalNames.goalThree.display}</span></p></div>
       </div>
     </div>
   )

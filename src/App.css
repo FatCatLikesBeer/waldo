@@ -10,12 +10,13 @@
 }
 
 .character-selection-modal {
-  width: 220px;
+  max-width: 220px;
   color: gainsboro;
   background-color: #282828;
   border-radius: 5px;
   position: absolute;
   box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
+  padding: 0 20px;
 }
 
 .character-selection-radius {
