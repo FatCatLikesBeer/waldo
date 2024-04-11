@@ -16,7 +16,7 @@
   border-radius: 5px;
   position: absolute;
   box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
-  padding: 0 20px;
+  padding: 6px 20px 0;
 }
 
 .character-selection-radius {

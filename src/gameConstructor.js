@@ -2,19 +2,19 @@ export default class Game {
   constructor(
     name,
     image,
-    firstName,
     firstDisplay,
-    secondName,
+    firstName,
     secondDisplay,
+    secondName,
+    thirdDisplay,
     thirdName,
-    thirdDisplay
   ) {
     this.gameName = name;
     this.image = image;
     this.goalNames = {
-      goalOne: { name: firstName, display: firstDisplay},
-      goalTwo: { name: secondName, display: secondDisplay},
-      goalThree: { name: thirdName, display: thirdDisplay},
+      goalOne: { display: firstDisplay, name: firstName },
+      goalTwo: { display: secondDisplay, name: secondName },
+      goalThree: { display: thirdDisplay, name: thirdName },
     }
   }
 }

@@ -9,8 +9,9 @@ import testPuzzle from './assets/react.svg';
 import Game from './gameConstructor';
 
 const gameData = [
-  new Game("nicola", puzzle1, "eyes", "eyes", "elbows", "elbows", "hair", "hair"),
-  new Game("text", puzzle2, "tildea", "ã", "uppercaseT", "T", "sharpS", "ß"),
+  // new Game("gameName", image, "APIname1", "displayName1", "APIname2", "displayName2", "APIname3", "displayName3"),
+  new Game("nicola", puzzle1, "Eyes", "eyes", "Elbows", "elbows", "Hair", "hair"),
+  new Game("text", puzzle2, "ã", "tildea", "T", "uppercaseT", "ß", "sharpS",),
   new Game("testicle", testPuzzle, "testicle", "testicle", "boobies", "boobies", "ass", "ass"),
 ];
 
@@ -18,17 +19,22 @@ const listOfLinks = gameData.map( elem => {
   return(elem.gameName);
 })
 
+const PuzzleInstances = (props) => {
+  const game = props.game
+  return(gameData.map( (elem, index) => {
+    if (game === elem.gameName) {
+      return( <Puzzle pic={elem.image} goalNames={elem.goalNames} key={index} /> )
+    }
+  }))
+}
+
 function App() {
   const [game, setGame] = useState('default'); // It might be better if I used useContext here.
 
   return(
     <>
       <Top game_names={listOfLinks} game_picker={setGame} />
-      {gameData.map( (elem, index)=> {
-        if (game === elem.gameName) {
-          return( <Puzzle pic={elem.image} goalNames={elem.goalNames} key={index} /> );
-        }
-      })}
+      <PuzzleInstances game={game} />
       <Bottom />
     </>
   )
