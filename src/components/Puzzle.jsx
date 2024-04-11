@@ -36,26 +36,37 @@ const CharacterSelectionModal = (props) => {
     document.addEventListener("keydown", handleKeydown);
   });
 
+  // I don't like working with the props parent object lol
   const goalNames = {...props.goal_names};
 
+  // Class automatically formats data for API
+  class DataFormatter {
+    constructor(gameName, goalName) {
+      this.gameName = gameName;
+      this.goalName = goalName;
+      this.loc = [imageX, imageY];
+    }
+  };
+
+  // This entire object isn't that necessary but I think
+  // it makes the return statement below a bit cleaner?
   const sendMe = {
     nameOne: goalNames.goalOne.name,
     nameTwo: goalNames.goalTwo.name,
     nameThree: goalNames.goalThree.name,
     sendOne: function() {
-      console.log(JSON.stringify({ gameName: props.game_name, goalName: sendMe.nameOne, loc: [imageX, imageY]}));
+      console.log(JSON.stringify(new DataFormatter(props.game_name, sendMe.nameOne)));
       closeModal();
     },
     sendTwo: function() {
-      console.log(JSON.stringify({ gameName: props.game_name, goalName: sendMe.nameTwo, loc: [imageX, imageY]}));
+      console.log(JSON.stringify(new DataFormatter(props.game_name, sendMe.nameTwo)));
       closeModal();
     },
     sendThree: function() {
-      console.log(JSON.stringify({ gameName: props.game_name, goalName: sendMe.nameThree, loc: [imageX, imageY]}));
+      console.log(JSON.stringify(new DataFormatter(props.game_name, sendMe.nameThree)));
       closeModal();
     },
   }
-
 
   return (
     <div>
@@ -86,10 +97,10 @@ const Puzzle = (props) => {
     // Image Click Coordinates
     const imageX = e.pageX - left - window.scrollX;
     const imageY = e.pageY - top - window.scrollY;
-    // Page Click Coordinates
+    // Page Click Coordinates: The page is the entire page
     const pageX = e.pageX;
     const pageY = e.pageY;
-    // Window Click Coordinates
+    // Window Click Coordinates: The window is the viewport boundry of the page
     const windX = e.clientX;
     const windY = e.clientY;
 
@@ -104,6 +115,7 @@ const Puzzle = (props) => {
 
   return(
     <>
+      {/* I need to be consistent with the prop names... */}
       <CharacterSelectionModal
         show_modal={showModal}
         page_loc={pageLoc}
