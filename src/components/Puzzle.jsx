@@ -1,18 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 
 const CharacterSelectionModal = (props) => {
-  // Controlls modal visibility
+  // Modal visibility controls
   const hide = props.show_modal ? "block" : "none";
   const closeModal = props.closeModal;
-  // Image Click Coordinates
-  const imageX = props.image_loc[0];
-  const imageY = props.image_loc[1];
-  // Page Click Coordinates
-  const pageX = props.page_loc[0];
-  const pageY = props.page_loc[1];
-  // Window Click Coordinates
-  const windX = props.window_loc[0];
-  const windY = props.window_loc[1];
+  // Image, Page, & Window Click Coordinates
+  const [[imageX, imageY], [pageX, pageY], [windX, windY]] = [props.image_loc, props.page_loc, props.window_loc];
   // Used to get the height of Modal
   const elementRef = useRef(null);
   // Used to switch modal up or down
@@ -48,8 +41,11 @@ const CharacterSelectionModal = (props) => {
     }
   };
 
-  // This entire object isn't that necessary but I think
-  // it makes the return statement below a bit cleaner?
+  /*
+  This entire object isn't that necessary but I needed a
+  place to contain the onClick functions for the dropdown modal
+  */
+  // !!! Replace this manualized bullshit with a mapped array !!!
   const sendMe = {
     nameOne: goalNames.goalOne.name,
     nameTwo: goalNames.goalTwo.name,
@@ -74,6 +70,7 @@ const CharacterSelectionModal = (props) => {
       </div>
       <div className="character-selection-modal" id="imageModal" style={{display: hide, top: pageY - modalUp, left: pageX + 20}} ref={elementRef}>
         <span className="modal-x-button" onClick={closeModal}>&times;</span>
+        {/* !!! Replace the following manualized bullshit with a mapped array !!! */}
         <div><p><span onClick={sendMe.sendOne}>{goalNames.goalOne.display}</span></p></div>
         <div><p><span onClick={sendMe.sendTwo}>{goalNames.goalTwo.display}</span></p></div>
         <div><p><span onClick={sendMe.sendThree}>{goalNames.goalThree.display}</span></p></div>
