@@ -43,15 +43,15 @@ const CharacterSelectionModal = (props) => {
     nameTwo: goalNames.goalTwo.name,
     nameThree: goalNames.goalThree.name,
     sendOne: function() {
-      console.log(JSON.stringify({ name: sendMe.nameOne, loc: [imageX, imageY]}));
+      console.log(JSON.stringify({ gameName: props.game_name, goalName: sendMe.nameOne, loc: [imageX, imageY]}));
       closeModal();
     },
     sendTwo: function() {
-      console.log(JSON.stringify({ name: sendMe.nameTwo, loc: [imageX, imageY]}));
+      console.log(JSON.stringify({ gameName: props.game_name, goalName: sendMe.nameTwo, loc: [imageX, imageY]}));
       closeModal();
     },
     sendThree: function() {
-      console.log(JSON.stringify({ name: sendMe.nameThree, loc: [imageX, imageY]}));
+      console.log(JSON.stringify({ gameName: props.game_name, goalName: sendMe.nameThree, loc: [imageX, imageY]}));
       closeModal();
     },
   }
@@ -111,6 +111,7 @@ const Puzzle = (props) => {
         window_loc={windowLoc}
         closeModal={modalOff}
         goal_names={props.goalNames}
+        game_name={props.gameName}
       />
       <img className="puzzle" onClick={handleClick} src={props.pic} />
     </>

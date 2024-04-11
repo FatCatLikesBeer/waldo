@@ -11,12 +11,15 @@ export default function Top(props) {
       gameName: elem,
       setGame: function(){setGame(elem)},
     });
-  })
+  });
+  const goHome = () => {
+    setGame("intro");
+  };
 
   return(
     <div id="navbar">
-      <h1 id="navtitle"><a href="/">Find Stuff</a></h1>
-      <h3 id="subtitle">A Where's Waldo Type Game</h3>
+      <h1 id="navtitle"><span onClick={goHome}>Letter Finder</span></h1>
+      <h3 id="subtitle">Where's Waldo but with text :)</h3>
       <div id="navlinksdiv">
         <ul id="navlinks">
           {gameData.map( (elem, index)=> {
