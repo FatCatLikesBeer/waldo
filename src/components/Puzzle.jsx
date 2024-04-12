@@ -29,9 +29,6 @@ const CharacterSelectionModal = (props) => {
     document.addEventListener("keydown", handleKeydown);
   });
 
-  // I don't like working with the props parent object lol
-  const goalNames = {...props.goal_names};
-
   // Class automatically formats data for API
   class DataFormatter {
     constructor(gameName, goalName) {
@@ -43,15 +40,15 @@ const CharacterSelectionModal = (props) => {
 
   // An array for the goal's display names
   const displayNames = [];
-  for (const key in goalNames) {
-    displayNames.push(goalNames[key].display);
+  for (const key in props.goal_names) {
+    displayNames.push(props.goal_names[key].display);
   };
 
   // An array for the goal's functions
   const goalFunctions = [];
-  for (const key in goalNames) {
+  for (const key in props.goal_names) {
     goalFunctions.push(function(){
-      console.log(JSON.stringify(new DataFormatter(props.game_name, goalNames[key].name)));
+      console.log(JSON.stringify(new DataFormatter(props.game_name, props.goal_names[key].name)));
       closeModal();
     });
   }
