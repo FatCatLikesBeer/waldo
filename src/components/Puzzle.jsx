@@ -90,38 +90,57 @@ const CharacterSelectionModal = (props) => {
   )
 };
 
+// Checkmark indicators
 const Checks = (props) => {
   const gameData = props.game_data
-  const [locationWin, setLocationWin] = useState([false, false, false]);
+  const [locationWin, setLocationWin] = useState(["🟡", "🟡", "🟡"]);
 
   useEffect(() => {
     if (gameData.location === "first") {
       const wins = locationWin;
       wins[0] = gameData.success;
-      setLocationWin(wins);
+      if (wins[0]) {
+        wins[0] = "🟢";
+        setLocationWin(wins);
+      } else {
+        wins[0] = "🔴";
+        setLocationWin(wins);
+      };
     };
     if (gameData.location === "second") {
       const wins = locationWin;
       wins[1] = gameData.success;
-      setLocationWin(wins);
+      if (wins[1]) {
+        wins[1] = "🟢";
+        setLocationWin(wins);
+      } else {
+        wins[1] = "🔴";
+        setLocationWin(wins);
+      };
     };
     if (gameData.location === "third") {
       const wins = locationWin;
       wins[2] = gameData.success;
-      setLocationWin(wins);
+      if (wins[2]) {
+        wins[2] = "🟢";
+        setLocationWin(wins);
+      } else {
+        wins[2] = "🔴";
+        setLocationWin(wins);
+      };
     };
   }, [props.game_data]);
 
   return (
     <div id="checks" >
       <span style={{margin: "20px"}}>
-        {locationWin[0] ? "✅" : "❌"}
+        {locationWin[0]}
       </span>
       <span style={{margin: "20px"}}>
-        {locationWin[1] ? "✅" : "❌"}
+        {locationWin[1]}
       </span>
       <span style={{margin: "20px"}}>
-        {locationWin[2] ? "✅" : "❌"}
+        {locationWin[2]}
       </span>
     </div>
   )
