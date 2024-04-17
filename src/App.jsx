@@ -11,10 +11,10 @@ import medium from './assets/medium.jpg';
 import hard from './assets/hard.jpg';
 
 const gameData = [
-  // new Game("gameName", image, "APIname1", "displayName1", "APIname2", "displayName2", "APIname3", "displayName3"),
-  new Game("easy", easy, "n", "n", "u", "u", "o", "o"),
-  new Game("medium", medium, "n", "n", "u", "u", "o", "o"),
-  new Game("hard", hard, "ã", "tildea", "T", "T", "ß", "sharpS"),
+  // new Game("gameName", image, "displayName1", "APIname1", "displayName2", "APIname2", "displayName3", "APIname3"),
+  new Game("easy", easy, "n", "first", "u", "second", "o", "third"),
+  new Game("medium", medium, "n", "first", "u", "second", "o", "third"),
+  new Game("hard", hard, "ã", "first", "T", "second", "ß", "third"),
 ];
 
 const listOfLinks = gameData.map( elem => {
@@ -31,7 +31,7 @@ const PuzzleInstances = (props) => {
 };
 
 const Home = (props) => {
-  const home = new Game("intro", intro, "b", "b", "p", "p", "d", "d");
+  const home = new Game("intro", intro, "b", "first", "p", "second", "d", "third");
   if (props.game === home.gameName) {
     return (<Puzzle pic={home.image} goalNames={home.goalNames} gameName={home.gameName} />)
   };

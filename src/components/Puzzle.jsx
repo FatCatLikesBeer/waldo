@@ -29,13 +29,20 @@ const CharacterSelectionModal = (props) => {
     document.addEventListener("keydown", handleKeydown);
   });
 
-  // Class automatically formats data for API
-  class DataFormatter {
-    constructor(gameName, goalName) {
-      this.gameName = gameName;
-      this.goalName = goalName;
-      this.loc = [imageX, imageY];
+  // URI formatter
+  function uriFormatter(gameName) {
+    return `http://free.local:3000/${gameName}`
+  };
+
+  // URI formatter
+  function fetchBodyFormatter(locationName, locX, locY, score = null) {
+    const result = {
+      location: locationName,
+      locX: locX,
+      locY: locY,
+      score: score,
     }
+    return JSON.stringify(result);
   };
 
   // An array for the goal's display names
@@ -48,7 +55,23 @@ const CharacterSelectionModal = (props) => {
   const goalFunctions = [];
   for (const key in props.goal_names) {
     goalFunctions.push(function(){
-      console.log(JSON.stringify(new DataFormatter(props.game_name, props.goal_names[key].name)));
+      const sendGoal = async () => {
+        const result = await fetch(uriFormatter(props.game_name), {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: fetchBodyFormatter(props.goal_names[key].name, imageX, imageY, props.game_data.score)
+        })
+        let jsonData;
+        if (!result.ok) {
+          throw new Error("Could not fetch data");
+        } else {
+          jsonData = await result.json();
+          props.set_game_data(jsonData);
+        }
+      };
+      sendGoal();
       closeModal();
     });
   }
@@ -67,6 +90,43 @@ const CharacterSelectionModal = (props) => {
   )
 };
 
+const Checks = (props) => {
+  const gameData = props.game_data
+  const [locationWin, setLocationWin] = useState([false, false, false]);
+
+  useEffect(() => {
+    if (gameData.location === "first") {
+      const wins = locationWin;
+      wins[0] = gameData.success;
+      setLocationWin(wins);
+    };
+    if (gameData.location === "second") {
+      const wins = locationWin;
+      wins[1] = gameData.success;
+      setLocationWin(wins);
+    };
+    if (gameData.location === "third") {
+      const wins = locationWin;
+      wins[2] = gameData.success;
+      setLocationWin(wins);
+    };
+  }, [props.game_data]);
+
+  return (
+    <div id="checks" >
+      <span style={{margin: "20px"}}>
+        {locationWin[0] ? "✅" : "❌"}
+      </span>
+      <span style={{margin: "20px"}}>
+        {locationWin[1] ? "✅" : "❌"}
+      </span>
+      <span style={{margin: "20px"}}>
+        {locationWin[2] ? "✅" : "❌"}
+      </span>
+    </div>
+  )
+};
+
 // Thanks to PaunescuDragos-99 / waldo-game-frontend
 // I didnt' have to knowledge to gather coordinates
 const Puzzle = (props) => {
@@ -75,6 +135,8 @@ const Puzzle = (props) => {
   const [imageLoc, setImageLoc] = useState([0, 0]);
   const [pageLoc, setPageLoc] = useState([0, 0]);
   const [windowLoc, setWindowLoc] = useState([0, 0]);
+
+  const [gameData, setGameData] = useState({message: "init"});
 
   const handleClick = (e) => {
     const elem = e.currentTarget;
@@ -98,6 +160,25 @@ const Puzzle = (props) => {
 
   const modalOff = () => {setShowModal(false)};
 
+  // Call API when puzzle loads
+  useEffect(() => {
+    const reqConfig = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const uri = `http://free.local:3000/${props.gameName}`;
+    const result = fetch(uri, reqConfig);
+    result
+      .then(response => {return response.json()})
+      .then(data => setGameData(data));
+  }, []);
+
+  useEffect(() => {
+    console.log(gameData);
+  },[gameData])
+
   return(
     <>
       {/* I need to be consistent with the prop names... */}
@@ -109,7 +190,10 @@ const Puzzle = (props) => {
         closeModal={modalOff}
         goal_names={props.goalNames}
         game_name={props.gameName}
+        game_data={gameData}
+        set_game_data={setGameData}
       />
+      <Checks game_data={gameData}/>
       <img className="puzzle" onClick={handleClick} src={props.pic} />
     </>
   )
