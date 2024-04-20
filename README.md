@@ -1,4 +1,4 @@
-#[The Odin Project: A Photo Tagging App](https://www.theodinproject.com/lessons/nodejs-where-s-waldo-a-photo-tagging-app)
+# [The Odin Project: A Photo Tagging App](https://www.theodinproject.com/lessons/nodejs-where-s-waldo-a-photo-tagging-app)
 
 This goal of this project was to build a game similar to Where's Waldo.
 
