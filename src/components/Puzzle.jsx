@@ -74,13 +74,21 @@ const Puzzle = (props) => {
   };
 
   // Log stuff to console.
-  useEffect(() => {
-                                                                              console.log("Game Data", gameData);
-  },[gameData])
+  // useEffect(() => {
+  //   console.log("Game Data", gameData);
+  // },[gameData])
 
   return(
     <>
       {/* I need to be consistent with the prop names... */}
+      <div id="options_container" style={{position: "relative"}}>
+        <Checks game_data={gameData}
+          goal_names={props.goalNames}
+          goal_indicators={goalIndicators}
+          set_goal_indicators={setGoalIndicators}
+        />
+        <button id="show_leaderboard" onClick={toggleLeaderboard}>Leaderboard</button>
+      </div>
       <GoalSelectionModal
         show_modal={showModal}
         page_loc={pageLoc}
@@ -102,14 +110,6 @@ const Puzzle = (props) => {
         set_game_data={setGameData}
         set_goal_indicators={setGoalIndicators}
       />
-      <div id="options_container" style={{position: "relative"}}>
-        <Checks game_data={gameData}
-          goal_names={props.goalNames}
-          goal_indicators={goalIndicators}
-          set_goal_indicators={setGoalIndicators}
-        />
-        <button id="show_leaderboard" onClick={toggleLeaderboard}>Leaderboard</button>
-      </div>
       <img className="puzzle" onClick={handleClick} src={props.pic} />
       <LeaderboardModal
         game_name={gameName}

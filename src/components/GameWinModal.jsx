@@ -35,7 +35,6 @@ const GameWinModal = (props) => {
   const isNameValid = () => {
     const minLength = 3;
     const maxLength = 10;
-                                                                                  console.log("Name: ", formData.name);
     return formData.name.length >= minLength && formData.name.length <= maxLength;
   }
 
@@ -57,7 +56,6 @@ const GameWinModal = (props) => {
         return response.json();
       })
       .then(data => {
-                                                                                  console.log("Set to leaderboardResponse:", data);
         setLeaderboardResponse(data);
         if (data.success) {
           setGameData("init");
@@ -86,10 +84,6 @@ const GameWinModal = (props) => {
     };
     document.addEventListener("keydown", handleKeydown);
   });
-
-  useEffect(() => {
-                                                                                    console.log("LdrBrd Rspns:",leaderboardResponse);
-  },[leaderboardResponse]);
 
   return (
     <div className="overlay" style={{display: hide}}>
