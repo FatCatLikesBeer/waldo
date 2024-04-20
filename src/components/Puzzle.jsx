@@ -1,11 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import GoalSelectionModal from './GoalSelectionModal';
 import Checks from './Checks';
+import GameWinModal from './GameWinModal';
 
 // Thanks to PaunescuDragos-99 / waldo-game-frontend
 // I didnt' have to knowledge to gather coordinates
 const Puzzle = (props) => {
+  const gameName = props.gameName;
   const [showModal, setShowModal] = useState(false);
+  const [gameWinModal, setGameWinModal] = useState(false);
+  const [leaderboardModal, setLeaderboardModal] = useState(false);
+  const [leaderboardResponse, setLeaderboardResposne] = useState("init leaderboard");
+  const [goalIndicators, setGoalIndicators] = useState(["🟡", "🟡", "🟡"]);
 
   const [imageLoc, setImageLoc] = useState([0, 0]);
   const [pageLoc, setPageLoc] = useState([0, 0]);
@@ -44,15 +50,28 @@ const Puzzle = (props) => {
         "Content-Type": "application/json",
       },
     };
-    const uri = `http://free.local:3000/${props.gameName}`;
+    const uri = `http://free.local:3000/${gameName}`;
     const result = fetch(uri, reqConfig);
     result
       .then(response => {return response.json()})
       .then(data => setGameData(data));
   }, []);
 
+  // Close game win modal
+  const closeGameWinModal = () => {
+    setGameWinModal(false);
+  };
+
+  // Open game win modal if win
   useEffect(() => {
-    console.log(gameData);
+    if (gameData.win) {
+      setGameWinModal(true);
+    };
+  },[gameData]);
+
+  // Log stuff to console.
+  useEffect(() => {
+                                                                              console.log("Game Data", gameData);
   },[gameData])
 
   return(
@@ -69,7 +88,21 @@ const Puzzle = (props) => {
         game_data={gameData}
         set_game_data={setGameData}
       />
-      <Checks game_data={gameData} goal_names={props.goalNames} />
+      <GameWinModal
+        show_game_win_modal={gameWinModal}
+        close_game_win_modal={closeGameWinModal}
+        game_name={gameName}
+        score={gameData.score}
+        leaderboard_response={leaderboardResponse}
+        set_leaderboard_response={setLeaderboardResposne}
+        set_game_data={setGameData}
+        set_goal_indicators={setGoalIndicators}
+      />
+      <Checks game_data={gameData}
+        goal_names={props.goalNames}
+        goal_indicators={goalIndicators}
+        set_goal_indicators={setGoalIndicators}
+      />
       <img className="puzzle" onClick={handleClick} src={props.pic} />
     </>
   )

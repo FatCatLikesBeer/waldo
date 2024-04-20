@@ -5,13 +5,15 @@ export default function Top(props) {
   const links = ["Text", "Waldo", "Coins"];
   const gameNames = props.game_names;
   const setGame = props.game_picker;
-  const gameData = []
+  const gameData = [];
+
   gameNames.forEach( elem => {
     gameData.push({
       gameName: elem,
       setGame: function(){setGame(elem)},
     });
   });
+
   const goHome = () => {
     setGame("intro");
   };
