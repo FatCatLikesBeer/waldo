@@ -2,14 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import GoalSelectionModal from './GoalSelectionModal';
 import Checks from './Checks';
 import GameWinModal from './GameWinModal';
+import LeaderboardModal from './LeaderboardModal';
 
 // Thanks to PaunescuDragos-99 / waldo-game-frontend
 // I didnt' have to knowledge to gather coordinates
 const Puzzle = (props) => {
   const gameName = props.gameName;
   const [showModal, setShowModal] = useState(false);
-  const [gameWinModal, setGameWinModal] = useState(true);
-  const [leaderboardModal, setLeaderboardModal] = useState(false);
+  const [gameWinModal, setGameWinModal] = useState(false);
+  const [leaderboardModal, setLeaderboardModal] = useState(true);
   const [leaderboardResponse, setLeaderboardResposne] = useState("init leaderboard");
   const [goalIndicators, setGoalIndicators] = useState(["🟡", "🟡", "🟡"]);
 
@@ -42,7 +43,7 @@ const Puzzle = (props) => {
 
   const modalOff = () => {setShowModal(false)};
 
-  // Call API when puzzle loads
+  // On puzzle load, fetch base game data from API
   useEffect(() => {
     const reqConfig = {
       method: "POST",
@@ -64,9 +65,7 @@ const Puzzle = (props) => {
 
   // Open game win modal if win
   useEffect(() => {
-    if (gameData.win) {
-      setGameWinModal(true);
-    };
+    if (gameData.win) { setGameWinModal(true) };
   },[gameData]);
 
   // Log stuff to console.
@@ -104,6 +103,11 @@ const Puzzle = (props) => {
         set_goal_indicators={setGoalIndicators}
       />
       <img className="puzzle" onClick={handleClick} src={props.pic} />
+      <LeaderboardModal
+        game_name={gameName}
+        show_leaderboard={leaderboardModal}
+        set_show_leaderboard={setLeaderboardModal}
+      />
     </>
   )
 }

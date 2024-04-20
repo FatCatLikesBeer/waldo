@@ -79,6 +79,14 @@ const GameWinModal = (props) => {
     }
   };
 
+  // Close modal when pressing escape
+  useEffect(() => {
+    const handleKeydown = (event) => {
+      if (event.key === "Escape") { closeModal(); };
+    };
+    document.addEventListener("keydown", handleKeydown);
+  });
+
   useEffect(() => {
                                                                                     console.log("LdrBrd Rspns:",leaderboardResponse);
   },[leaderboardResponse]);
