@@ -8,7 +8,7 @@ import GameWinModal from './GameWinModal';
 const Puzzle = (props) => {
   const gameName = props.gameName;
   const [showModal, setShowModal] = useState(false);
-  const [gameWinModal, setGameWinModal] = useState(false);
+  const [gameWinModal, setGameWinModal] = useState(true);
   const [leaderboardModal, setLeaderboardModal] = useState(false);
   const [leaderboardResponse, setLeaderboardResposne] = useState("init leaderboard");
   const [goalIndicators, setGoalIndicators] = useState(["🟡", "🟡", "🟡"]);

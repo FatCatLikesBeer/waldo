@@ -84,20 +84,22 @@ const GameWinModal = (props) => {
   },[leaderboardResponse]);
 
   return (
-    <div className="game_win_modal" style={{display: hide}}>
-      <span className="modal-x-button" onClick={closeModal}>&times;</span>
-      <h1 style={{color: "gold", marginTop: "18px"}}>You won!</h1>
-      <p>Add your name to the leaderboard!</p>
-      <label>Name:</label>
-      <br />
-      <input
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleInputChange}
-      />
-      <div style={{marginTop: "10px", fontSize: "12px"}}>3 to 10 characters</div>
-      <button style={{backgroundColor: "gold", color: "black", marginTop: "18px"}} onClick={handleClick}>Submit</button>
+    <div className="overlay" style={{display: hide}}>
+      <div className="game_win_modal" style={{display: hide}}>
+        <span className="modal-x-button" onClick={closeModal}>&times;</span>
+        <h1 style={{color: "gold", marginTop: "18px"}}>You won!</h1>
+        <p>Add your name to the leaderboard!</p>
+        <label>Name:</label>
+        <br />
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+        />
+        <div style={{marginTop: "10px", fontSize: "12px"}}>3 to 10 characters</div>
+        <button style={{backgroundColor: "gold", color: "black", marginTop: "18px"}} onClick={handleClick}>Submit</button>
+      </div>
     </div>
   )
 };
