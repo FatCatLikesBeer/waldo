@@ -51,7 +51,7 @@ const Puzzle = (props) => {
         "Content-Type": "application/json",
       },
     };
-    const uri = `http://free.local:3000/${gameName}`;
+    const uri = `https://letter-finder-api.fly.dev/${gameName}`;
     const result = fetch(uri, reqConfig);
     result
       .then(response => {return response.json()})

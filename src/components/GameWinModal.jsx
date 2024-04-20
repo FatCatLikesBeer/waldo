@@ -42,7 +42,7 @@ const GameWinModal = (props) => {
     console.log(formData);
     e.preventDefault();
     if (isNameValid()) {
-      await fetch('http://free.local:3000/leaderboard', {
+      await fetch('https://letter-finder-api.fly.dev/leaderboard', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

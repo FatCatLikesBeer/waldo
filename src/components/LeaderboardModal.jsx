@@ -5,7 +5,7 @@ const LeaderboardModal = (props) => {
   const gameName = props.game_name;
   const hide = props.show_leaderboard ? "block" : "none";
   const showLeaderboard = props.set_show_leaderboard;
-  const uri = `http://free.local:3000/leaderboard?name=${gameName}`;
+  const uri = `https://letter-finder-api.fly.dev/leaderboard?name=${gameName}`;
 
   const closeModal = () => {
     showLeaderboard(false)

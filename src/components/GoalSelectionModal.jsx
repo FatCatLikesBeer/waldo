@@ -31,7 +31,7 @@ const GoalSelectionModal = (props) => {
 
   // URI formatter
   function uriFormatter(gameName) {
-    return `http://free.local:3000/${gameName}`
+    return `https://letter-finder-api.fly.dev/${gameName}`
   };
 
   // URI formatter
