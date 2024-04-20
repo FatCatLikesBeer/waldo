@@ -10,7 +10,7 @@ const Puzzle = (props) => {
   const gameName = props.gameName;
   const [showModal, setShowModal] = useState(false);
   const [gameWinModal, setGameWinModal] = useState(false);
-  const [leaderboardModal, setLeaderboardModal] = useState(true);
+  const [leaderboardModal, setLeaderboardModal] = useState(false);
   const [leaderboardResponse, setLeaderboardResposne] = useState("init leaderboard");
   const [goalIndicators, setGoalIndicators] = useState(["🟡", "🟡", "🟡"]);
 
@@ -68,6 +68,11 @@ const Puzzle = (props) => {
     if (gameData.win) { setGameWinModal(true) };
   },[gameData]);
 
+  // Toggle leaderboard
+  const toggleLeaderboard = () => {
+    setLeaderboardModal(!leaderboardModal);
+  };
+
   // Log stuff to console.
   useEffect(() => {
                                                                               console.log("Game Data", gameData);
@@ -97,11 +102,14 @@ const Puzzle = (props) => {
         set_game_data={setGameData}
         set_goal_indicators={setGoalIndicators}
       />
-      <Checks game_data={gameData}
-        goal_names={props.goalNames}
-        goal_indicators={goalIndicators}
-        set_goal_indicators={setGoalIndicators}
-      />
+      <div id="options_container" style={{position: "relative"}}>
+        <Checks game_data={gameData}
+          goal_names={props.goalNames}
+          goal_indicators={goalIndicators}
+          set_goal_indicators={setGoalIndicators}
+        />
+        <button id="show_leaderboard" onClick={toggleLeaderboard}>Leaderboard</button>
+      </div>
       <img className="puzzle" onClick={handleClick} src={props.pic} />
       <LeaderboardModal
         game_name={gameName}

@@ -39,8 +39,7 @@ const LeaderboardModal = (props) => {
   // Grab scores on load
   useEffect(() => {
     grabScores();
-                                                                    console.log(leaderboardData);
-  },[])
+  },[hide])
 
   // Put scores into a formatted array
   const displayScores = leaderboardData.map((elem) => {

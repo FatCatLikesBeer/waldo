@@ -138,3 +138,9 @@
   font-size: 12px;
 }
 
+#show_leaderboard {
+  position: absolute;
+  right: 45px;
+  top: -8px;
+  color: gold;
+}
