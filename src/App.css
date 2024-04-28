@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 0 2rem 2rem;
   text-align: center;
+  background-color: #282828;
+  color: gainsboro;
 }
 
 .puzzle {
@@ -121,6 +123,7 @@
 
 .table {
   width: 100%;
+  color: gainsboro;
   border: 1px solid;
 }
 
